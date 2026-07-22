@@ -1,0 +1,12 @@
+POST http://localhost:5000/api/clients
+Content-Type: application/json
+
+{
+  "companyName": "ABC Technologies",
+  "companyCode": "ABC001",
+  "industry": "IT",
+  "subscriptionPlan": "Premium",
+  "contactEmail": "info@abc.com",
+  "phoneNumber": "9876543210",
+  "status": 1
+}
