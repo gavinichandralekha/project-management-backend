@@ -76,3 +76,44 @@ export const getClientById = async (req, res) => {
     });
   }
 };
+
+
+export const updateClient = async (req, res) => {
+  try {
+    
+    const { id } = req.params;
+
+    
+    const updatedClient = await Client.findByIdAndUpdate(
+      id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    
+    if (!updatedClient) {
+      return res.status(404).json({
+        success: false,
+        message: "Client not found",
+      });
+    }
+
+    
+    res.status(200).json({
+      success: true,
+      message: "Client updated successfully",
+      data: updatedClient,
+    });
+
+  } catch (error) {
+    
+    res.status(500).json({
+      success: false,
+      message: "Failed to update client",
+      error: error.message,
+    });
+  }
+};

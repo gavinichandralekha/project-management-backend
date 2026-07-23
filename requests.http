@@ -16,3 +16,17 @@ GET http://localhost:5000/api/clients
 
 ### Get Client By ID
 GET http://localhost:5000/api/clients/6a60d0369889c7dc322bfd74
+
+### Update Client
+PUT http://localhost:5000/api/clients/6a60d0369889c7dc322bfd74
+Content-Type: application/json
+
+{
+  "companyName": "ABC Technologies Pvt Ltd",
+  "companyCode": "ABC001",
+  "industry": "Software",
+  "subscriptionPlan": "Enterprise",
+  "contactEmail": "support@abc.com",
+  "phoneNumber": "9123456789",
+  "status": 1
+}
