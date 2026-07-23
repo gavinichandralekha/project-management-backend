@@ -74,3 +74,72 @@ GET http://localhost:5000/api/clients?page=2&limit=1
 
 ### Page 3
 GET http://localhost:5000/api/clients?page=3&limit=1
+
+### Search + Pagination
+GET http://localhost:5000/api/clients?search=IT&page=1&limit=1
+
+### Missing Company Name
+POST http://localhost:5000/api/clients
+Content-Type: application/json
+
+{
+  "companyCode": "AAA001",
+  "industry": "IT",
+  "subscriptionPlan": "Premium",
+  "contactEmail": "abc@test.com",
+  "phoneNumber": "9876543210"
+}
+
+### Invalid Email
+POST http://localhost:5000/api/clients
+Content-Type: application/json
+
+{
+  "companyName": "ABC",
+  "companyCode": "AAA002",
+  "industry": "IT",
+  "subscriptionPlan": "Premium",
+  "contactEmail": "abc",
+  "phoneNumber": "9876543210"
+}
+
+### Invalid Phone
+POST http://localhost:5000/api/clients
+Content-Type: application/json
+
+{
+  "companyName": "ABC",
+  "companyCode": "AAA003",
+  "industry": "IT",
+  "subscriptionPlan": "Premium",
+  "contactEmail": "abc@test.com",
+  "phoneNumber": "12345"
+}
+
+### Invalid Status
+POST http://localhost:5000/api/clients
+Content-Type: application/json
+
+{
+  "companyName": "ABC",
+  "companyCode": "AAA004",
+  "industry": "IT",
+  "subscriptionPlan": "Premium",
+  "contactEmail": "abc@test.com",
+  "phoneNumber": "9876543210",
+  "status": 5
+}
+
+### Duplicate Company Code
+POST http://localhost:5000/api/clients
+Content-Type: application/json
+
+{
+  "companyName": "Another Company",
+  "companyCode": "ABC001",
+  "industry": "IT",
+  "subscriptionPlan": "Premium",
+  "contactEmail": "another@test.com",
+  "phoneNumber": "9999999999"
+}
+

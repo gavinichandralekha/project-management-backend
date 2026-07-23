@@ -13,7 +13,6 @@ const clientSchema = new mongoose.Schema(
       required: [true, "Company Code is required"],
       unique: true,
       trim: true,
-      uppercase: true,
     },
 
     industry: {
@@ -30,23 +29,35 @@ const clientSchema = new mongoose.Schema(
 
     contactEmail: {
       type: String,
-      required: [true, "Contact Email is required"],
+      required: [true, "Email is required"],
       trim: true,
       lowercase: true,
+
+      match: [
+        /^\S+@\S+\.\S+$/,
+        "Please enter a valid email address",
+      ],
     },
 
     phoneNumber: {
       type: String,
       required: [true, "Phone Number is required"],
-      trim: true,
+      
+       match: [
+        /^[0-9]{10}$/,
+        "Phone Number must contain exactly 10 digits",
+      ],
     },
 
     status: {
       type: Number,
-      default: 1,
-      enum: [0, 1],
+      enum:{
+        values: [0, 1],
+        message: "Status must be 0 (Inactive) or 1 (Active)",
     },
+    default:1,
   },
+  },  
   {
     timestamps: true,
   }

@@ -6,20 +6,45 @@ export const createClient = async (req, res) => {
     
     const client = await Client.create(req.body);
 
-    // Send success response
+    
     res.status(201).json({
       success: true,
       message: "Client created successfully",
       data: client,
     });
   } catch (error) {
-    
-    res.status(400).json({
+
+  
+  if (error.code === 11000) {
+
+    const field = Object.keys(error.keyValue)[0];
+
+    return res.status(400).json({
+      success: false,
+      message: `${field} already exists`,
+    });
+
+  }
+
+  
+  if (error.name === "ValidationError") {
+
+    return res.status(400).json({
       success: false,
       message: error.message,
     });
+
   }
-};
+
+ 
+  res.status(500).json({
+    success: false,
+    message: "Internal Server Error",
+  });
+}
+
+}
+
 
 export const getClients = async (req, res) => {
   try {
