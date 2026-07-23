@@ -65,3 +65,12 @@ GET http://localhost:5000/api/clients?search=Premium
 
 ### Search by Email
 GET http://localhost:5000/api/clients?search=info@abc.com
+
+### Page 1
+GET http://localhost:5000/api/clients?page=1&limit=1
+
+### Page 2
+GET http://localhost:5000/api/clients?page=2&limit=1
+
+### Page 3
+GET http://localhost:5000/api/clients?page=3&limit=1

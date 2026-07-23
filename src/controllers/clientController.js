@@ -21,11 +21,17 @@ export const createClient = async (req, res) => {
   }
 };
 
-
 export const getClients = async (req, res) => {
   try {
     
-     const search = req.query.search || "";
+    const search = req.query.search || "";
+
+   
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+
+    
+    const skip = (page - 1) * limit;
 
     
     const searchFilter = {
@@ -39,20 +45,31 @@ export const getClients = async (req, res) => {
     };
 
     
-    const clients =
-      search === ""
-        ? await Client.find()
-        : await Client.find(searchFilter);
+    const filter = search ? searchFilter : {};
+
+    
+    const totalClients = await Client.countDocuments(filter);
+
+    
+    const clients = await Client.find(filter)
+      .skip(skip)
+      .limit(limit);
+
+    
+    const totalPages = Math.ceil(totalClients / limit);
 
     
     res.status(200).json({
       success: true,
       message: "Clients fetched successfully",
+      currentPage: page,
+      totalPages,
+      totalClients,
       count: clients.length,
       data: clients,
     });
+
   } catch (error) {
-    
     res.status(500).json({
       success: false,
       message: "Failed to fetch clients",
@@ -60,7 +77,6 @@ export const getClients = async (req, res) => {
     });
   }
 };
-
 
 export const getClientById = async (req, res) => {
   try {
