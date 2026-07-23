@@ -24,10 +24,10 @@ export const createClient = async (req, res) => {
 
 export const getClients = async (req, res) => {
   try {
-    // Fetch all clients from MongoDB
+    
     const clients = await Client.find();
 
-    // Send success response
+    
     res.status(200).json({
       success: true,
       message: "Clients fetched successfully",
@@ -35,10 +35,43 @@ export const getClients = async (req, res) => {
       data: clients,
     });
   } catch (error) {
-    // Handle errors
+    
     res.status(500).json({
       success: false,
       message: "Failed to fetch clients",
+      error: error.message,
+    });
+  }
+};
+
+
+export const getClientById = async (req, res) => {
+  try {
+    
+    const { id } = req.params;
+
+    
+    const client = await Client.findById(id);
+
+    
+    if (!client) {
+      return res.status(404).json({
+        success: false,
+        message: "Client not found",
+      });
+    }
+
+    
+    res.status(200).json({
+      success: true,
+      message: "Client fetched successfully",
+      data: client,
+    });
+  } catch (error) {
+  
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch client",
       error: error.message,
     });
   }
