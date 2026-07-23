@@ -30,3 +30,20 @@ Content-Type: application/json
   "phoneNumber": "9123456789",
   "status": 1
 }
+### Delete Client
+DELETE http://localhost:5000/api/clients/6a61afca6bcb4cd4564db13e
+
+
+### Create Client (New Test Data)
+POST http://localhost:5000/api/clients
+Content-Type: application/json
+
+{
+  "companyName": "CDE Technologies",
+  "companyCode": "CDE001",
+  "industry": "IT",
+  "subscriptionPlan": "Premium",
+  "contactEmail": "info@xyz.com",
+  "phoneNumber": "9876543120",
+  "status": 1
+}
