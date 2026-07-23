@@ -10,3 +10,6 @@ Content-Type: application/json
   "phoneNumber": "9876543210",
   "status": 1
 }
+
+### Get All Clients
+GET http://localhost:5000/api/clients
