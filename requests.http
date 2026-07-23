@@ -47,3 +47,21 @@ Content-Type: application/json
   "phoneNumber": "9876543120",
   "status": 1
 }
+
+### Get All Clients
+GET http://localhost:5000/api/clients
+
+### Search by Company Name
+GET http://localhost:5000/api/clients?search=ABC
+
+### Search by Company Code
+GET http://localhost:5000/api/clients?search=ABC001
+
+### Search by Industry
+GET http://localhost:5000/api/clients?search=IT
+
+### Search by Subscription Plan
+GET http://localhost:5000/api/clients?search=Premium
+
+### Search by Email
+GET http://localhost:5000/api/clients?search=info@abc.com

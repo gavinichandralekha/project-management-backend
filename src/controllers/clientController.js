@@ -25,7 +25,24 @@ export const createClient = async (req, res) => {
 export const getClients = async (req, res) => {
   try {
     
-    const clients = await Client.find();
+     const search = req.query.search || "";
+
+    
+    const searchFilter = {
+      $or: [
+        { companyName: { $regex: search, $options: "i" } },
+        { companyCode: { $regex: search, $options: "i" } },
+        { industry: { $regex: search, $options: "i" } },
+        { subscriptionPlan: { $regex: search, $options: "i" } },
+        { contactEmail: { $regex: search, $options: "i" } },
+      ],
+    };
+
+    
+    const clients =
+      search === ""
+        ? await Client.find()
+        : await Client.find(searchFilter);
 
     
     res.status(200).json({
