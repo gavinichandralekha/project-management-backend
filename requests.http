@@ -11,9 +11,11 @@ Content-Type: application/json
   "status": 1
 }
 
-### Get All Clients
-GET http://localhost:5000/api/clients
 
+### Get All Clients (Protected)
+
+GET http://localhost:5000/api/clients
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjFlYjI0YzNlOTQ4ZjcwMzQwZDAyZSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc4NDg3NTY3NywiZXhwIjoxNzg0OTYyMDc3fQ.GmRlHCml856ixLfPO1meMFKqKMZgj52qBf2f-HyC_XA
 ### Get Client By ID
 GET http://localhost:5000/api/clients/6a60d0369889c7dc322bfd74
 
@@ -143,3 +145,76 @@ Content-Type: application/json
   "phoneNumber": "9999999999"
 }
 
+### Super Admin Login
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "superadmin@gmail.com",
+  "password": "Admin@123"
+}
+
+### Invalid Super Admin Login
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "superadmin@gmail.com",
+  "password": "WrongPassword"
+}
+
+### Create Client (Protected)
+
+POST http://localhost:5000/api/clients
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: application/json
+
+{
+  "companyName": "XYZ Technologies",
+  "companyCode": "XYZ001",
+  "industry": "IT",
+  "subscriptionPlan": "Premium",
+  "contactEmail": "info@xyz.com",
+  "phoneNumber": "9876543211",
+  "status": 1
+}
+
+### Super Admin Login
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "superadmin@gmail.com",
+  "password": "Admin@123"
+}
+
+### Get All Clients (Protected)
+GET http://localhost:5000/api/clients
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjFlYjI0YzNlOTQ4ZjcwMzQwZDAyZSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc4NDg3NjcyMywiZXhwIjoxNzg0OTYzMTIzfQ.nwVxQoTpMvOZMhuB4K3eX9h6Uo-h2QyIfMEXqQLECnw
+
+### Get All Clients (Without Token)
+GET http://localhost:5000/api/clients
+
+### Create Company Admin
+
+POST http://localhost:5000/api/company-admins
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjFlYjI0YzNlOTQ4ZjcwMzQwZDAyZSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc4NDg3NzY0NSwiZXhwIjoxNzg0OTY0MDQ1fQ.mOqOckDx08QCWxtQJauyYEc0iLP53hfHyVYdwGhko1M
+Content-Type: application/json
+
+{
+  "clientId": "6a61aee16bcb4cd4564db13a",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john@company.com",
+  "phoneNumber": "9876543210"
+}
+
+### Company Admin Login
+
+POST http://localhost:5000/api/company-admins/login
+Content-Type: application/json
+
+{
+  "email": "john@company.com",
+  "password": "Admin@123"
+}
