@@ -1,3 +1,4 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjFlYjI0YzNlOTQ4ZjcwMzQwZDAyZSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc4NDk1MTIwOSwiZXhwIjoxNzg1MDM3NjA5fQ.eZ-9Z3etGLXWSHvx1WhOCzC9PqUi23Xi3lspS33zqOM
 POST http://localhost:5000/api/clients
 Content-Type: application/json
 
@@ -197,24 +198,116 @@ GET http://localhost:5000/api/clients
 
 ### Create Company Admin
 
-POST http://localhost:5000/api/company-admins
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjFlYjI0YzNlOTQ4ZjcwMzQwZDAyZSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc4NDg3NzY0NSwiZXhwIjoxNzg0OTY0MDQ1fQ.mOqOckDx08QCWxtQJauyYEc0iLP53hfHyVYdwGhko1M
+POST http://localhost:5000/api/company-admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjFlYjI0YzNlOTQ4ZjcwMzQwZDAyZSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc4NDk3NzYzOCwiZXhwIjoxNzg1MDY0MDM4fQ.-c4i4re8aM_wW8Pw2HR0WyzdXy7JlEal-QyNWT4Qk00
 Content-Type: application/json
 
 {
   "clientId": "6a61aee16bcb4cd4564db13a",
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john@company.com",
-  "phoneNumber": "9876543210"
+  "firstName": "justin",
+  "lastName": "beber",
+  "email": "g81332838@gmail.com",
+  "phoneNumber": "9876544210"
 }
 
 ### Company Admin Login
 
-POST http://localhost:5000/api/company-admins/login
+POST http://localhost:5000/api/company-admin/login
 Content-Type: application/json
 
 {
   "email": "john@company.com",
   "password": "Admin@123"
 }
+
+### Super Admin Login
+
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "superadmin@gmail.com",
+  "password": "Admin@123"
+}
+
+### Get All Company Admins
+
+GET http://localhost:5000/api/company-admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjFlYjI0YzNlOTQ4ZjcwMzQwZDAyZSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc4NDk1MjQ2MCwiZXhwIjoxNzg1MDM4ODYwfQ.FeTdiuy4WmRGUn47gVoIoxA-V66P-_klYDn91iQDOhM
+
+
+
+### Search Company Admin by First Name
+
+GET http://localhost:5000/api/company-admin?search=John
+Authorization: Bearer {{token}}
+
+### Search Company Admin by Last Name
+
+GET http://localhost:5000/api/company-admin?search=Doe
+Authorization: Bearer {{token}}
+
+### Search Company Admin by Email
+
+GET http://localhost:5000/api/company-admin?search=john@company.com
+Authorization: Bearer {{token}}
+
+### Search Company Admin by Phone Number
+
+GET http://localhost:5000/api/company-admin?search=9876543210
+Authorization: Bearer {{token}}
+
+### Company Admin Pagination - Page 1
+
+GET http://localhost:5000/api/company-admin?page=1&limit=2
+Authorization: Bearer {{token}}
+
+### Company Admin Pagination - Page 2
+
+GET http://localhost:5000/api/company-admin?page=2&limit=2
+Authorization: Bearer {{token}}
+
+### Search + Pagination
+
+GET http://localhost:5000/api/company-admin?search=John&page=1&limit=2
+Authorization: Bearer {{token}}
+
+### Unauthorized Request
+
+GET http://localhost:5000/api/company-admin
+
+### Update Company Admin
+
+PUT http://localhost:5000/api/company-admin/6a631315d719de44424c8a7d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjFlYjI0YzNlOTQ4ZjcwMzQwZDAyZSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc4NDk1ODYzMiwiZXhwIjoxNzg1MDQ1MDMyfQ.qjmlq8Bf-u-5lAGlTq4b2rS8CXn--inWwnv22E8gLOM
+Content-Type: application/json
+
+{
+  "firstName": "Johnny",
+  "lastName": "Doe",
+  "phoneNumber": "9999999999",
+  "status": 1
+}
+
+### Get Company Admin By ID
+
+GET http://localhost:5000/api/company-admin/6a631315d719de44424c8a7d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjFlYjI0YzNlOTQ4ZjcwMzQwZDAyZSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc4NDk1ODYzMiwiZXhwIjoxNzg1MDQ1MDMyfQ.qjmlq8Bf-u-5lAGlTq4b2rS8CXn--inWwnv22E8gLOM
+
+### Delete Company Admin
+
+DELETE http://localhost:5000/api/company-admin/6a631315d719de44424c8a7d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjFlYjI0YzNlOTQ4ZjcwMzQwZDAyZSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc4NDk1ODYzMiwiZXhwIjoxNzg1MDQ1MDMyfQ.qjmlq8Bf-u-5lAGlTq4b2rS8CXn--inWwnv22E8gLOM
+
+POST http://localhost:5000/api/company-admin
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  "clientId": "6a61aee16bcb4cd4564db13a",
+  "firstName": "justin",
+  "lastName": "beber",
+  "email": "g81332838@gmail.com",
+  "phoneNumber": "9876544210"
+}
+

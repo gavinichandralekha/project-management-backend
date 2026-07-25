@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use("/api/clients", clientRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/company-admins", companyAdminRoutes);
+app.use("/api/company-admin", companyAdminRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
