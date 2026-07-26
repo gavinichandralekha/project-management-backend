@@ -299,15 +299,61 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjFlYjI0Y
 DELETE http://localhost:5000/api/company-admin/6a631315d719de44424c8a7d
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjFlYjI0YzNlOTQ4ZjcwMzQwZDAyZSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc4NDk1ODYzMiwiZXhwIjoxNzg1MDQ1MDMyfQ.qjmlq8Bf-u-5lAGlTq4b2rS8CXn--inWwnv22E8gLOM
 
-POST http://localhost:5000/api/company-admin
-Authorization: Bearer YOUR_TOKEN
+### ==========================================
+### Create Project Manager
+### ==========================================
+
+POST http://localhost:5000/api/project-manager
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1ZDcxOWRlNDQ0MjRjOGE3ZCIsInJvbGUiOiJDT01QQU5ZX0FETUlOIiwiaWF0IjoxNzg0OTg4MjE0LCJleHAiOjE3ODUwNzQ2MTR9.oEMMiNOmudetmywoXUn93anthRmW6FwX2D1qBU6wu-Y
 Content-Type: application/json
 
 {
-  "clientId": "6a61aee16bcb4cd4564db13a",
-  "firstName": "justin",
-  "lastName": "beber",
-  "email": "g81332838@gmail.com",
-  "phoneNumber": "9876544210"
+  "companyAdminId": "6a631315d719de44424c8a7d",
+  "firstName": "David",
+  "lastName": "Miller",
+  "email": "david.manager10@example.com",
+  "phoneNumber": "9876543211"
 }
+
+### Project Manager Login
+
+POST http://localhost:5000/api/project-manager/login
+Content-Type: application/json
+
+{
+  "email": "david.manager10@example.com",
+  "password": "Manager@123"
+}
+
+### Get All Project Managers
+
+GET http://localhost:5000/api/project-manager?page=1&search=
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1ZDcxOWRlNDQ0MjRjOGE3ZCIsInJvbGUiOiJDT01QQU5ZX0FETUlOIiwiaWF0IjoxNzg0OTk5NDQxLCJleHAiOjE3ODUwODU4NDF9.tHHIjl3K-SO7JcEdjFAQiuvPIpw86fmPmIqqNNOeEgM
+
+### Get Project Manager By ID
+
+GET http://localhost:5000/api/project-manager/6a64cb6d38871a30dbcef9f5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1ZDcxOWRlNDQ0MjRjOGE3ZCIsInJvbGUiOiJDT01QQU5ZX0FETUlOIiwiaWF0IjoxNzg1MDAwMTA3LCJleHAiOjE3ODUwODY1MDd9.XqnJUFrHchWjiV8NF-b8vkrHcQZKl-sUXdlJbUCPwQU
+
+### Update Project Manager
+
+PUT http://localhost:5000/api/project-manager/6a64cb6d38871a30dbcef9f5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1ZDcxOWRlNDQ0MjRjOGE3ZCIsInJvbGUiOiJDT01QQU5ZX0FETUlOIiwiaWF0IjoxNzg1MDMyMjEyLCJleHAiOjE3ODUxMTg2MTJ9.OhnnvW6PFQOEWSQhwzDAE9uhvmAEitjsCtcJVCNKRbs
+Content-Type: application/json
+
+{
+  "firstName": "David Updated",
+  "lastName": "Miller",
+  "email": "david.manager10@example.com",
+  "phoneNumber": "9999999999",
+  "status": 1
+}
+
+### Delete Project Manager
+
+DELETE http://localhost:5000/api/project-manager/6a64cb6d38871a30dbcef9f5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1ZDcxOWRlNDQ0MjRjOGE3ZCIsInJvbGUiOiJDT01QQU5ZX0FETUlOIiwiaWF0IjoxNzg1MDMyMjEyLCJleHAiOjE3ODUxMTg2MTJ9.OhnnvW6PFQOEWSQhwzDAE9uhvmAEitjsCtcJVCNKRbs
+
+
+
 
