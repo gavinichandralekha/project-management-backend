@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 import TeamMember from "../models/TeamMember.js";
 import CompanyAdmin from "../models/CompanyAdmin.js";
@@ -19,6 +20,8 @@ export const createTeamMember = async (req, res) => {
       lastName,
       email,
       phoneNumber,
+      department,
+      designation,
     } = req.body;
 
     // Validate Input
@@ -83,12 +86,15 @@ export const createTeamMember = async (req, res) => {
     // Create Team Member
     const teamMember =
       await TeamMember.create({
-        companyAdminId,
+        clientId: projectManager.clientId,
+        companyAdminId: projectManager.companyAdminId,
         projectManagerId,
         firstName,
         lastName,
         email,
         phoneNumber,
+        department,
+        designation,
         password: hashedPassword,
       });
 
@@ -272,6 +278,8 @@ export const updateTeamMember = async (req, res) => {
       email,
       phoneNumber,
       status,
+      department,
+      designation,
     } = req.body;
 
     const teamMember = await TeamMember.findById(id);
@@ -316,6 +324,8 @@ export const updateTeamMember = async (req, res) => {
     teamMember.email = email;
     teamMember.phoneNumber = phoneNumber;
     teamMember.status = status;
+    teamMember.department = department;
+    teamMember.designation = designation;
 
     await teamMember.save();
 
@@ -446,6 +456,87 @@ export const loginTeamMember = async (req, res) => {
         email: teamMember.email,
         role: teamMember.role,
       },
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+// ==========================================
+// Activate / Deactivate Team Member
+// ==========================================
+
+export const toggleTeamMemberStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const teamMember = await TeamMember.findById(id);
+
+    if (!teamMember) {
+      return res.status(404).json({
+        success: false,
+        message: "Team Member not found.",
+      });
+    }
+
+    // Toggle Status
+    teamMember.status = teamMember.status === 1 ? 0 : 1;
+
+    await teamMember.save();
+
+    res.status(200).json({
+      success: true,
+      message:
+        teamMember.status === 1
+          ? "Team Member activated successfully."
+          : "Team Member deactivated successfully.",
+      data: teamMember,
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+
+  }
+};
+// ==========================================
+// Fix Existing Team Members (One Time)
+// ==========================================
+
+export const fixTeamMemberClientIds = async (req, res) => {
+  try {
+    const teamMembers = await TeamMember.find();
+
+    let updatedCount = 0;
+
+    for (const teamMember of teamMembers) {
+      if (!teamMember.clientId) {
+        const projectManager = await ProjectManager.findById(
+          teamMember.projectManagerId
+        );
+
+        if (projectManager) {
+          teamMember.clientId = projectManager.clientId;
+          teamMember.companyAdminId =
+            projectManager.companyAdminId;
+
+          await teamMember.save();
+
+          updatedCount++;
+        }
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      message: `${updatedCount} Team Members updated successfully.`,
     });
 
   } catch (error) {

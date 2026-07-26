@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const teamMemberSchema = new mongoose.Schema(
   {
+    clientId: {
+     type: mongoose.Schema.Types.ObjectId,
+     ref: "Client",
+     required: true,
+    },
     companyAdminId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "CompanyAdmin",
@@ -38,6 +43,14 @@ const teamMemberSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+    },
+    department: {
+      type: String,
+      default: "",
+    },
+    designation: {
+    type: String,
+    default: "",
     },
 
     password: {

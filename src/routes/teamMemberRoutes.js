@@ -2,11 +2,13 @@ import express from "express";
 
 import {
   createTeamMember,
+  loginTeamMember,
   getTeamMembers,
   getTeamMemberById,
   updateTeamMember,
   deleteTeamMember,
-  loginTeamMember,
+  toggleTeamMemberStatus,
+  fixTeamMemberClientIds,
 } from "../controllers/teamMemberController.js";
 
 import {
@@ -34,6 +36,18 @@ router.put(
   protect,
   authorize("COMPANY_ADMIN"),
   updateTeamMember
+);
+router.patch(
+  "/:id/status",
+  protect,
+  authorize("COMPANY_ADMIN"),
+  toggleTeamMemberStatus
+);
+router.patch(
+  "/fix-clientids",
+  protect,
+  authorize("COMPANY_ADMIN"),
+  fixTeamMemberClientIds
 );
 router.delete(
   "/:id",

@@ -32,6 +32,14 @@ const companyAdminSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    department: {
+      type: String,
+      default: "",
+    },
+    designation: {
+    type: String,
+    default: "",
+    },
 
     password: {
       type: String,

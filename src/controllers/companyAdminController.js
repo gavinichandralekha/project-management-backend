@@ -317,11 +317,11 @@ export const updateCompanyAdmin = async (req, res) => {
     const { id } = req.params;
 
     const {
+      clientId,
       firstName,
       lastName,
       email,
       phoneNumber,
-      clientId,
       status,
     } = req.body;
 
@@ -346,6 +346,9 @@ export const updateCompanyAdmin = async (req, res) => {
       }
     }
 
+    companyAdmin.clientId =
+      clientId || companyAdmin.clientId;
+
     companyAdmin.firstName =
       firstName || companyAdmin.firstName;
 
@@ -358,8 +361,7 @@ export const updateCompanyAdmin = async (req, res) => {
     companyAdmin.phoneNumber =
       phoneNumber || companyAdmin.phoneNumber;
 
-    companyAdmin.clientId =
-      clientId || companyAdmin.clientId;
+    
 
     companyAdmin.status =
       status ?? companyAdmin.status;

@@ -2,6 +2,12 @@ import mongoose from "mongoose";
 
 const projectManagerSchema = new mongoose.Schema(
   {
+    
+    clientId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Client",
+      required: true,
+    },
     companyAdminId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "CompanyAdmin",
@@ -32,7 +38,14 @@ const projectManagerSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
+    department: {
+      type: String,
+      default: "",
+    },
+    designation: {
+    type: String,
+    default: "",
+    },
     password: {
       type: String,
       required: true,

@@ -7,6 +7,7 @@ import {
   getProjectManagerById,
   updateProjectManager,
   deleteProjectManager,
+  toggleProjectManagerStatus,
 } from "../controllers/projectManagerController.js";
 
 import {
@@ -42,6 +43,12 @@ router.put(
   protect,
   authorize("COMPANY_ADMIN"),
   updateProjectManager
+);
+router.patch(
+  "/:id/status",
+  protect,
+  authorize("COMPANY_ADMIN"),
+  toggleProjectManagerStatus
 );
 router.delete(
   "/:id",

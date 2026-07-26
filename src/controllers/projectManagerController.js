@@ -13,6 +13,8 @@ export const createProjectManager = async (req, res) => {
       lastName,
       email,
       phoneNumber,
+      department,
+      designation,
     } = req.body;
 
     // Validate Required Fields
@@ -63,12 +65,15 @@ export const createProjectManager = async (req, res) => {
 
     
     const projectManager =
-      await ProjectManager.create({
+        await ProjectManager.create({
+        clientId: companyAdmin.clientId,
         companyAdminId,
         firstName,
         lastName,
         email,
         phoneNumber,
+        department,
+        designation,
         password: hashedPassword,
       });
 
@@ -326,6 +331,8 @@ export const updateProjectManager = async (req, res) => {
       phoneNumber,
       companyAdminId,
       status,
+      department,
+      designation,
     } = req.body;
 
     // Find Project Manager
@@ -374,6 +381,14 @@ export const updateProjectManager = async (req, res) => {
 
     projectManager.status =
       status ?? projectManager.status;
+    
+    projectManager.department =
+      department ||
+      projectManager.department; 
+      
+    projectManager.designation =
+      designation||
+      projectManager.designation;  
 
     await projectManager.save();
 
@@ -427,6 +442,47 @@ export const deleteProjectManager = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Project Manager deleted successfully.",
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+
+  }
+};
+
+// ==========================================
+// Activate / Deactivate Project Manager
+// ==========================================
+
+export const toggleProjectManagerStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const projectManager = await ProjectManager.findById(id);
+
+    if (!projectManager) {
+      return res.status(404).json({
+        success: false,
+        message: "Project Manager not found.",
+      });
+    }
+
+    // Toggle status
+    projectManager.status = projectManager.status === 1 ? 0 : 1;
+
+    await projectManager.save();
+
+    res.status(200).json({
+      success: true,
+      message:
+        projectManager.status === 1
+          ? "Project Manager activated successfully."
+          : "Project Manager deactivated successfully.",
+      data: projectManager,
     });
 
   } catch (error) {
