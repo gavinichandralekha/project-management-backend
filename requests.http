@@ -354,6 +354,55 @@ Content-Type: application/json
 DELETE http://localhost:5000/api/project-manager/6a64cb6d38871a30dbcef9f5
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1ZDcxOWRlNDQ0MjRjOGE3ZCIsInJvbGUiOiJDT01QQU5ZX0FETUlOIiwiaWF0IjoxNzg1MDMyMjEyLCJleHAiOjE3ODUxMTg2MTJ9.OhnnvW6PFQOEWSQhwzDAE9uhvmAEitjsCtcJVCNKRbs
 
+### Create Team Member
 
+POST http://localhost:5000/api/team-member
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1ZDcxOWRlNDQ0MjRjOGE3ZCIsInJvbGUiOiJDT01QQU5ZX0FETUlOIiwiaWF0IjoxNzg1MDMyMjEyLCJleHAiOjE3ODUxMTg2MTJ9.OhnnvW6PFQOEWSQhwzDAE9uhvmAEitjsCtcJVCNKRbs
+Content-Type: application/json
 
+{
+  "companyAdminId": "6a631315d719de44424c8a7d",
+  "projectManagerId": "6a64c2b42dc6b33ffa512e62",
+  "firstName": "Ram",
+  "lastName": "Sharma",
+  "email": "ram.team@example.com",
+  "phoneNumber": "9876643210"
+}
+### Get Team Members
 
+GET http://localhost:5000/api/team-member?page=1&limit=5&search=
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1ZDcxOWRlNDQ0MjRjOGE3ZCIsInJvbGUiOiJDT01QQU5ZX0FETUlOIiwiaWF0IjoxNzg1MDMyMjEyLCJleHAiOjE3ODUxMTg2MTJ9.OhnnvW6PFQOEWSQhwzDAE9uhvmAEitjsCtcJVCNKRbs
+
+### Get Team Member By ID
+
+GET http://localhost:5000/api/team-member/6a658bc1a9edcfde34d4fa7e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1ZDcxOWRlNDQ0MjRjOGE3ZCIsInJvbGUiOiJDT01QQU5ZX0FETUlOIiwiaWF0IjoxNzg1MDMyMjEyLCJleHAiOjE3ODUxMTg2MTJ9.OhnnvW6PFQOEWSQhwzDAE9uhvmAEitjsCtcJVCNKRbs
+
+### Update Team Member
+
+PUT http://localhost:5000/api/team-member/6a658bc1a9edcfde34d4fa7e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1ZDcxOWRlNDQ0MjRjOGE3ZCIsInJvbGUiOiJDT01QQU5ZX0FETUlOIiwiaWF0IjoxNzg1MDQwOTEwLCJleHAiOjE3ODUxMjczMTB9.OVKK4Gl18sI-Ce4E_dPwEIdrEF9dxk7jSNK5ghJeIgo
+Content-Type: application/json
+
+{
+  "projectManagerId": "6a64cb6d38871a30dbcef9f5",
+  "firstName": "Amit",
+  "lastName": "Kumar",
+  "email": "amit.team@example.com",
+  "phoneNumber": "9999999999",
+  "status": 1
+}
+### Delete Team Member
+
+DELETE http://localhost:5000/api/team-member/6a658bc1a9edcfde34d4fa7e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1ZDcxOWRlNDQ0MjRjOGE3ZCIsInJvbGUiOiJDT01QQU5ZX0FETUlOIiwiaWF0IjoxNzg1MDQwOTEwLCJleHAiOjE3ODUxMjczMTB9.OVKK4Gl18sI-Ce4E_dPwEIdrEF9dxk7jSNK5ghJeIgo
+
+### Team Member Login
+
+POST http://localhost:5000/api/team-member/login
+Content-Type: application/json
+
+{
+  "email": "ram.team@example.com",
+  "password": "Member@123"
+}

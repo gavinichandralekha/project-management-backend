@@ -262,6 +262,23 @@ export const getCompanyAdmins = async (req, res) => {
 
   }
 };
+export const getCompanyAdminDropdown = async (req, res) => {
+  try {
+    const companyAdmins = await CompanyAdmin.find({ status: 1 })
+      .select("firstName lastName email")
+      .sort({ firstName: 1 });
+
+    res.status(200).json({
+      success: true,
+      data: companyAdmins,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 export const getCompanyAdminById = async (req, res) => {
   try {
     const { id } = req.params;

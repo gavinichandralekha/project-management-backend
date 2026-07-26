@@ -4,6 +4,7 @@ import clientRoutes from "./routes/clientRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import companyAdminRoutes from "./routes/companyAdminRoutes.js";
 import projectManagerRoutes from "./routes/projectManagerRoutes.js";
+import teamMemberRoutes from "./routes/teamMemberRoutes.js";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use("/api/clients", clientRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/company-admin", companyAdminRoutes);
 app.use("/api/project-manager", projectManagerRoutes);
+app.use("/api/team-member", teamMemberRoutes);
 
 // Test Route
 app.get("/", (req, res) => {

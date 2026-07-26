@@ -4,6 +4,7 @@ import {
     createCompanyAdmin,
     loginCompanyAdmin,
     getCompanyAdmins,
+    getCompanyAdminDropdown,
     getCompanyAdminById,
     updateCompanyAdmin,
     deleteCompanyAdmin,
@@ -32,6 +33,12 @@ router.get(
   protect,
   authorize("SUPER_ADMIN"),
   getCompanyAdmins
+);
+router.get(
+  "/dropdown",
+  protect,
+  authorize("COMPANY_ADMIN"),
+  getCompanyAdminDropdown
 );
 
 router.get(
