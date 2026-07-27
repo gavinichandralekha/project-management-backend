@@ -1,10 +1,16 @@
 import express from "express";
 
-import { loginSuperAdmin } from "../controllers/authController.js";
+import {
+  loginSuperAdmin,
+  login,
+} from "../controllers/authController.js";
 
 const router = express.Router();
 
+// Existing Super Admin Login
+router.post("/super-admin/login", loginSuperAdmin);
 
-router.post("/login", loginSuperAdmin);
+// New Unified Login
+router.post("/login", login);
 
 export default router;

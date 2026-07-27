@@ -415,3 +415,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1Z
 
 PATCH http://localhost:5000/api/team-member/fix-clientids
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjMxMzE1ZDcxOWRlNDQ0MjRjOGE3ZCIsInJvbGUiOiJDT01QQU5ZX0FETUlOIiwiaWF0IjoxNzg1MDYzNjIwLCJleHAiOjE3ODUxNTAwMjB9.82teTbud9DbGid75V2RlPUcKdbfOa5RDDrCV6rbama0
+
+### ==========================================
+### Unified Login (All Users)
+### ==========================================
+
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "superadmin@gmail.com",
+  "password": "Admin@123"
+}
